@@ -3,7 +3,7 @@ import { Router, Route } from 'react-router-dom';
 import * as BooksAPI from './BooksAPI';
 import './App.css';
 import Header from './Header';
-import BookShelf from './BookShelf';
+import MainBookShelves from './MainBookShelves';
 import SearchPage from './SearchPage';
 
 class BooksApp extends React.Component {
@@ -15,7 +15,7 @@ class BooksApp extends React.Component {
     return (
       <div className='app'>
         <Header />
-        <Route exact path='/' component={BookShelf} />
+        <Route exact path='/' component={MainBookShelves} />
         <Route path='/search' component={SearchPage} />
       </div>
     );
