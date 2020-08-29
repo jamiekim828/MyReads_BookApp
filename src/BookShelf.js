@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 class BookShelf extends React.Component {
   render() {
@@ -240,6 +241,9 @@ class BookShelf extends React.Component {
               </ol>
             </div>
           </div>
+        </div>
+        <div className='open-search'>
+          <Link to='/search'>Add Books</Link>
         </div>
       </div>
     );
