@@ -4,6 +4,9 @@ import BookShelf from './BookShelf';
 
 class MainBookShelves extends React.Component {
   render() {
+    const { books } = this.props;
+    console.log('this.props', this.props);
+
     return (
       <div className='list-books-content'>
         <BookShelf />

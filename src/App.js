@@ -1,5 +1,5 @@
 import React from 'react';
-import { Router, Route } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import * as BooksAPI from './BooksAPI';
 import './App.css';
 import Header from './Header';
@@ -11,11 +11,22 @@ class BooksApp extends React.Component {
     books: [],
   };
 
+  componentDidMount() {
+    BooksAPI.getAll().then((books) => {
+      this.setState({ books: books });
+    });
+  }
+
   render() {
+    console.log('state App.js', this.state);
     return (
       <div className='app'>
         <Header />
-        <Route exact path='/' component={MainBookShelves} />
+        <Route
+          exact
+          path='/'
+          render={() => <MainBookShelves books={this.state.books} />}
+        />
         <Route path='/search' component={SearchPage} />
       </div>
     );
