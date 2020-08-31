@@ -1,32 +1,67 @@
 import React from 'react';
-import { search } from './BooksAPI';
+import { Link } from 'react-router-dom';
+import Book from './Book';
+import * as BooksAPI from './BooksAPI';
 
 class SearchPage extends React.Component {
+  state = {
+    input: '',
+    searchResults: [],
+  };
+
+  updateInput = (input) => {
+    this.setState({ input: input }, () => {
+      if (this.state.input.length >= 1) {
+        this.props.onSearchBook(this.state.input);
+      }
+    });
+  };
+
+  searchUpdateShelf = (book, newShelf) => {
+    this.setState(this.props.updateShelf(book, newShelf));
+  };
+
   render() {
+    console.log('this.props', this.props, 'this.state', this.state);
     return (
       <div className='search-books'>
         <div className='search-books-bar'>
-          <button
-            className='close-search'
-            onClick={() => this.setState({ showSearchPage: false })}
-          >
+          <Link to='/' className='close-search'>
             Close
-          </button>
-          <div className='search-books-input-wrapper'>
-            {/*
-          NOTES: The search from BooksAPI is limited to a particular set of search terms.
-          You can find these search terms here:
-          https://github.com/udacity/reactnd-project-myreads-starter/blob/master/SEARCH_TERMS.md
+          </Link>
 
-          However, remember that the BooksAPI.search method DOES search by title or author. So, don't worry if
-          you don't find a specific author or title. Every search is limited by search terms.
-        */}
-            <input type='text' placeholder='Search by title or author' />
+          <div className='search-books-input-wrapper'>
+            <input
+              value={this.state.input}
+              onChange={(e) => {
+                this.updateInput(e.target.value);
+                this.setState({ input: e.target.value });
+
+                if (e.target.value) {
+                  BooksAPI.search(e.target.value).then((res) =>
+                    res.length > 0
+                      ? this.setState({ searchResults: res })
+                      : this.setState({ searchResults: [] })
+                  );
+                } else this.setState({ searchResults: [] });
+              }}
+              type='text'
+              placeholder='Search by title or author'
+            />
           </div>
         </div>
-        <div className='search-books-results'>
-          <ol className='books-grid'></ol>
-        </div>
+
+        {this.state.input && (
+          <div className='search-books-results'>
+            <ol className='books-grid'>
+              <Book
+                books={this.state.searchResults}
+                shelf={this.props.shelf}
+                searchUpdateShelf={this.searchUpdateShelf}
+              />
+            </ol>
+          </div>
+        )}
       </div>
     );
   }

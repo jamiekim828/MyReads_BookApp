@@ -2,6 +2,7 @@ import React from 'react';
 
 class Book extends React.Component {
   render() {
+    console.log(this.props.books);
     return (
       <li>
         <div className='book'>

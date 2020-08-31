@@ -13,9 +13,9 @@ class BooksApp extends React.Component {
   };
 
   shelves = [
-    { name: 'Currently Reading' },
-    { name: 'Wish to Read' },
-    { name: 'Completed Reading' },
+    { currentlyReading: 'Currently Reading' },
+    { wishToRead: 'Wish to Read' },
+    { completedReading: 'Completed Reading' },
   ];
 
   componentDidMount() {
@@ -24,11 +24,22 @@ class BooksApp extends React.Component {
     });
   }
 
-  searchBook(query) {
+  updateShelf = (book, shelf) => {
+    BooksAPI.update(book, shelf).then((res) => {
+      book.shelf = shelf;
+      this.setState((currentBooks) => ({
+        books: currentBooks.books
+          .filter((b) => b.id !== book.id)
+          .concat([book]),
+      }));
+    });
+  };
+
+  searchBook = (query) => {
     BooksAPI.search(query).then((books) => {
       this.setState({ searched: books });
     });
-  }
+  };
 
   render() {
     console.log('state App.js', this.state);
@@ -50,6 +61,7 @@ class BooksApp extends React.Component {
               onSearchBook={(query) => {
                 this.searchBook(query);
               }}
+              onUpdateShelf={this.updateShelf}
             />
           )}
         />
