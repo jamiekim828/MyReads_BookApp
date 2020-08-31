@@ -9,11 +9,24 @@ import SearchPage from './SearchPage';
 class BooksApp extends React.Component {
   state = {
     books: [],
+    searched: [],
   };
+
+  shelves = [
+    { name: 'Currently Reading' },
+    { name: 'Wish to Read' },
+    { name: 'Completed Reading' },
+  ];
 
   componentDidMount() {
     BooksAPI.getAll().then((books) => {
       this.setState({ books: books });
+    });
+  }
+
+  searchBook(query) {
+    BooksAPI.search(query).then((books) => {
+      this.setState({ searched: books });
     });
   }
 
@@ -25,9 +38,21 @@ class BooksApp extends React.Component {
         <Route
           exact
           path='/'
-          render={() => <MainBookShelves books={this.state.books} />}
+          render={() => (
+            <MainBookShelves books={this.state.books} shelves={this.shelves} />
+          )}
         />
-        <Route path='/search' component={SearchPage} />
+        <Route
+          path='/search'
+          render={() => (
+            <SearchPage
+              searched={this.state.searched}
+              onSearchBook={(query) => {
+                this.searchBook(query);
+              }}
+            />
+          )}
+        />
       </div>
     );
   }
