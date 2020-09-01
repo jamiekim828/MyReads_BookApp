@@ -24,9 +24,15 @@ class BooksApp extends React.Component {
     });
   }
 
-  updateShelf = (book, shelf) => {
-    BooksAPI.update(book, shelf).then((res) => {
-      book.shelf = shelf;
+  loadMainPage = () => {
+    BooksAPI.getAll().then((books) => {
+      this.setState({ books: books });
+    });
+  };
+
+  bookShelfChange = (book, newShelf) => {
+    BooksAPI.update(book, newShelf).then(() => {
+      book.shelf = newShelf;
       this.setState((currentBooks) => ({
         books: currentBooks.books
           .filter((b) => b.id !== book.id)
@@ -41,6 +47,12 @@ class BooksApp extends React.Component {
     });
   };
 
+  searchedBookShelfChange = (book, newShelf) => {
+    BooksAPI.update(book, newShelf).then(() => {
+      this.loadMainPage();
+    });
+  };
+
   render() {
     console.log('state App.js', this.state);
     return (
@@ -50,7 +62,11 @@ class BooksApp extends React.Component {
           exact
           path='/'
           render={() => (
-            <MainBookShelves books={this.state.books} shelves={this.shelves} />
+            <MainBookShelves
+              books={this.state.books}
+              shelves={this.shelves}
+              bookShelfChange={this.bookShelfChange}
+            />
           )}
         />
         <Route
@@ -58,10 +74,11 @@ class BooksApp extends React.Component {
           render={() => (
             <SearchPage
               searched={this.state.searched}
+              shelves={this.shelves}
               onSearchBook={(query) => {
                 this.searchBook(query);
               }}
-              onUpdateShelf={this.updateShelf}
+              onSearchUpdateShelf={this.searchedBookShelfChange}
             />
           )}
         />

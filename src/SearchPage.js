@@ -61,8 +61,8 @@ class SearchPage extends React.Component {
                       imageLinks={book.imageLinks}
                       title={book.title}
                       authors={book.authors}
-                      shelf={this.props.shelf}
-                      searchUpdateShelf={this.searchUpdateShelf}
+                      shelf={this.props.shelves}
+                      onSearchUpdateShelf={this.onSearchUpdateShelf}
                     />
                   </li>
                 ))}

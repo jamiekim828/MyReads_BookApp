@@ -10,6 +10,7 @@ class Book extends React.Component {
       backgroundImg = this.props.book.imageLinks.thumbnail;
     }
 
+    console.log(this.props);
     return (
       <div className='book'>
         <div className='book-top'>
@@ -22,7 +23,7 @@ class Book extends React.Component {
             }}
           ></div>
           <div className='book-shelf-changer'>
-            <select>
+            <select onChange={this.props.onSearchUpdateShelf}>
               <option value='move' disabled>
                 Move to...
               </option>

@@ -1,17 +1,42 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import BookShelf from './BookShelf';
+import MyBooks from './MyBooks';
 
 class MainBookShelves extends React.Component {
+  shelves = [
+    { currentlyReading: 'Currently Reading' },
+    { wishToRead: 'Wish to Read' },
+    { completedReading: 'Completed Reading' },
+  ];
+
   render() {
-    const { books } = this.props;
     console.log('this.props', this.props);
 
     return (
       <div className='list-books-content'>
-        <BookShelf />
+        <div>
+          <div className='bookshelf'>
+            <h2 className='bookshelf-title'>Currently Reading</h2>
+            <div className='bookshelf-books'>
+              <MyBooks />
+            </div>
+          </div>
+          <div className='bookshelf'>
+            <h2 className='bookshelf-title'>Wish To Read</h2>
+            <div className='bookshelf-books'>
+              <MyBooks />
+            </div>
+          </div>
+          <div className='bookshelf'>
+            <h2 className='bookshelf-title'>Completed Reading</h2>
+            <div className='bookshelf-books'>
+              <MyBooks />
+            </div>
+          </div>
+        </div>
+
         <div className='open-search'>
-          <Link to='/search'>Add Books</Link>
+          <Link to='/search'>ADD BOOKS</Link>
         </div>
       </div>
     );
