@@ -18,11 +18,24 @@ class SearchPage extends React.Component {
   };
 
   searchUpdateShelf = (book, newShelf) => {
-    this.setState(this.props.updateShelf(book, newShelf));
+    this.setState(this.props.onSearchUpdateShelf(book, newShelf));
   };
 
   render() {
-    console.log('this.props', this.props, 'this.state', this.state);
+    console.log(this.props.selectedBooks);
+
+    let listBooks = this.props.selectedBooks;
+    let searchedBooks = this.state.searched;
+
+    console.log(this.state.searched.length);
+
+    for (let i = 0; i < listBooks.length; i++) {
+      for (let j = 0; j < searchedBooks.length; j++) {
+        if (listBooks[i].id === searchedBooks[j].id) {
+          searchedBooks[j].shelf = listBooks[i].shelf;
+        }
+      }
+    }
 
     return (
       <div className='search-books'>
@@ -57,16 +70,38 @@ class SearchPage extends React.Component {
                 this.state.searched.map((book) => (
                   <li key={book.id}>
                     <Book
+                      preSelectedBooks={this.props.selectedBooks}
                       book={book}
                       imageLinks={book.imageLinks}
                       title={book.title}
                       authors={book.authors}
-                      shelf={this.props.shelves}
-                      onSearchUpdateShelf={this.onSearchUpdateShelf}
+                      onSearchUpdateShelf={this.searchUpdateShelf}
                     />
                   </li>
                 ))}
             </ol>
+          </div>
+        )}
+
+        {this.state.searched.length === undefined && (
+          <div className='error-message'>
+            <p>
+              <b>Please search with valid terms :</b>'Android', 'Art',
+              'Artificial Intelligence', 'Astronomy', 'Austen', 'Baseball',
+              'Basketball', 'Bhagat', 'Biography', 'Brief', 'Business', 'Camus',
+              'Cervantes', 'Christie', 'Classics', 'Comics', 'Cook', 'Cricket',
+              'Cycling', 'Desai', 'Design', 'Development', 'Digital Marketing',
+              'Drama', 'Drawing', 'Dumas', 'Education', 'Everything', 'Fantasy',
+              'Film', 'Finance', 'First', 'Fitness', 'Football', 'Future',
+              'Games', 'Gandhi', 'Homer', 'Horror', 'Hugo', 'Ibsen', 'Journey',
+              'Kafka', 'King', 'Lahiri', 'Larsson', 'Learn', 'Literary Fiction',
+              'Make', 'Manage', 'Marquez', 'Money', 'Mystery', 'Negotiate',
+              'Painting', 'Philosophy', 'Photography', 'Poetry', 'Production',
+              'Programming', 'React', 'Redux', 'River', 'Robotics', 'Rowling',
+              'Satire', 'Science Fiction', 'Shakespeare', 'Singh', 'Swimming',
+              'Tale', 'Thrun', 'Time', 'Tolstoy', 'Travel', 'Ultimate', 'Virtual
+              Reality', 'Web Development', 'iOS'{' '}
+            </p>
           </div>
         )}
       </div>

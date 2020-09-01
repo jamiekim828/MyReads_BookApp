@@ -16,13 +16,8 @@ class BooksApp extends React.Component {
     { currentlyReading: 'Currently Reading' },
     { wishToRead: 'Wish to Read' },
     { completedReading: 'Completed Reading' },
+    { none: 'none' },
   ];
-
-  componentDidMount() {
-    BooksAPI.getAll().then((books) => {
-      this.setState({ books: books });
-    });
-  }
 
   loadMainPage = () => {
     BooksAPI.getAll().then((books) => {
@@ -31,7 +26,8 @@ class BooksApp extends React.Component {
   };
 
   bookShelfChange = (book, newShelf) => {
-    BooksAPI.update(book, newShelf).then(() => {
+    BooksAPI.update(book, newShelf).then((res) => {
+      console.log(book.shelf, newShelf);
       book.shelf = newShelf;
       this.setState((currentBooks) => ({
         books: currentBooks.books
@@ -49,12 +45,17 @@ class BooksApp extends React.Component {
 
   searchedBookShelfChange = (book, newShelf) => {
     BooksAPI.update(book, newShelf).then(() => {
-      this.loadMainPage();
+      book.shelf = newShelf;
     });
   };
 
+  componentDidMount() {
+    BooksAPI.getAll().then((books) => {
+      this.setState({ books: books });
+    });
+  }
+
   render() {
-    console.log('state App.js', this.state);
     return (
       <div className='app'>
         <Header />
@@ -73,6 +74,7 @@ class BooksApp extends React.Component {
           path='/search'
           render={() => (
             <SearchPage
+              selectedBooks={this.state.books}
               searched={this.state.searched}
               shelves={this.shelves}
               onSearchBook={(query) => {
