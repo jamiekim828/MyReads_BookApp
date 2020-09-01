@@ -18,19 +18,31 @@ class MainBookShelves extends React.Component {
           <div className='bookshelf'>
             <h2 className='bookshelf-title'>Currently Reading</h2>
             <div className='bookshelf-books'>
-              <MyBooks />
+              <MyBooks
+                name='currentlyReading'
+                books={this.props.books}
+                onBookShelfChange={this.props.bookShelfChange}
+              />
             </div>
           </div>
           <div className='bookshelf'>
             <h2 className='bookshelf-title'>Wish To Read</h2>
             <div className='bookshelf-books'>
-              <MyBooks />
+              <MyBooks
+                name='wantToRead'
+                books={this.props.books}
+                onBookShelfChange={this.props.bookShelfChange}
+              />
             </div>
           </div>
           <div className='bookshelf'>
             <h2 className='bookshelf-title'>Completed Reading</h2>
             <div className='bookshelf-books'>
-              <MyBooks />
+              <MyBooks
+                name='read'
+                books={this.props.books}
+                onBookShelfChange={this.props.bookShelfChange}
+              />
             </div>
           </div>
         </div>
