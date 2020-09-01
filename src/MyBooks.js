@@ -21,7 +21,11 @@ class MyBooks extends React.Component {
                     }}
                   ></div>
                   <div className='book-shelf-changer'>
-                    <select>
+                    <select
+                      onChange={(e) =>
+                        this.props.onBookShelfChange(book, e.target.value)
+                      }
+                    >
                       <option value='move' disabled>
                         Move to...
                       </option>
@@ -30,12 +34,11 @@ class MyBooks extends React.Component {
                       </option>
                       <option value='wantToRead'>Want to Read</option>
                       <option value='read'>Read</option>
-                      <option value='none'>None</option>
                     </select>
                   </div>
                 </div>
-                <div className='book-title'></div>
-                <div className='book-authors'></div>
+                <div className='book-title'>{book.title}</div>
+                <div className='book-authors'>{book.authors}</div>
               </div>
             </li>
           ))}
