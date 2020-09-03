@@ -48,7 +48,9 @@ class MainBookShelves extends React.Component {
         </div>
 
         <div className='open-search'>
-          <Link to='/search'>ADD BOOKS</Link>
+          <Link to='/search'>
+            <button>Search more books</button>
+          </Link>
         </div>
       </div>
     );
