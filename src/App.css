@@ -17,7 +17,7 @@ body,
 
 .list-books-title {
   padding: 10px 0;
-  background: #2e7c31;
+  background: rgb(235, 115, 135);
   text-align: center;
 }
 
@@ -171,7 +171,7 @@ button:active {
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background: #60ac5d;
+  background: rgb(235, 115, 135);
   background-image: url('./icons/arrow-drop-down.svg');
   background-repeat: no-repeat;
   background-position: center;
@@ -202,5 +202,5 @@ button:active {
 .error-message {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 10;
-  color: #2e7d32;
+  color: rgb(3, 40, 161);
 }
