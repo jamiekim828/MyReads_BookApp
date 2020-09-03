@@ -1,4 +1,5 @@
 import React from 'react';
+import { Route } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import Book from './Book';
 import * as BooksAPI from './BooksAPI';
@@ -22,12 +23,10 @@ class SearchPage extends React.Component {
   };
 
   render() {
-    console.log(this.props.selectedBooks);
-
     let listBooks = this.props.selectedBooks;
     let searchedBooks = this.state.searched;
 
-    console.log(this.state.searched.length);
+    // console.log(this.state.searched.length);
 
     for (let i = 0; i < listBooks.length; i++) {
       for (let j = 0; j < searchedBooks.length; j++) {
@@ -43,6 +42,9 @@ class SearchPage extends React.Component {
           <Link to='/' className='close-search'>
             Close
           </Link>
+          {/* <Link to='/' className='close-search'>
+            <Route exact path='/' render={() => <BooksApp />} />
+          </Link> */}
 
           <div className='search-books-input-wrapper'>
             <input
@@ -100,7 +102,7 @@ class SearchPage extends React.Component {
               'Programming', 'React', 'Redux', 'River', 'Robotics', 'Rowling',
               'Satire', 'Science Fiction', 'Shakespeare', 'Singh', 'Swimming',
               'Tale', 'Thrun', 'Time', 'Tolstoy', 'Travel', 'Ultimate', 'Virtual
-              Reality', 'Web Development', 'iOS'{' '}
+              Reality', 'Web Development', 'iOS'
             </p>
           </div>
         )}

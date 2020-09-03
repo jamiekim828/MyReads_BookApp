@@ -10,8 +10,6 @@ class Book extends React.Component {
       backgroundImg = this.props.book.imageLinks.thumbnail;
     }
 
-    console.log(this.props);
-
     return (
       <div className='book'>
         <div className='book-top'>

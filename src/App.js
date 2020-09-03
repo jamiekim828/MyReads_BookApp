@@ -43,10 +43,15 @@ class BooksApp extends React.Component {
     });
   };
 
-  searchedBookShelfChange = (book, newShelf) => {
-    BooksAPI.update(book, newShelf).then(() => {
+  searchedBookShelfChange = async (book, newShelf) => {
+    await BooksAPI.update(book, newShelf).then(() => {
       book.shelf = newShelf;
+      console.log(book.shelf);
     });
+    let bookStatus = await BooksAPI.getAll();
+
+    this.setState({ books: bookStatus });
+    console.log(this.state.books);
   };
 
   componentDidMount() {
