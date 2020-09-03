@@ -26,8 +26,6 @@ class SearchPage extends React.Component {
     let listBooks = this.props.selectedBooks;
     let searchedBooks = this.state.searched;
 
-    // console.log(this.state.searched.length);
-
     for (let i = 0; i < listBooks.length; i++) {
       for (let j = 0; j < searchedBooks.length; j++) {
         if (listBooks[i].id === searchedBooks[j].id) {
@@ -87,18 +85,21 @@ class SearchPage extends React.Component {
 
         {this.state.searched.length === undefined && (
           <div className='error-message'>
+            <h3>
+              <b>Please search with valid terms :</b>
+            </h3>
             <p>
-              <b>Please search with valid terms :</b>'Android', 'Art',
-              'Artificial Intelligence', 'Astronomy', 'Austen', 'Baseball',
-              'Basketball', 'Bhagat', 'Biography', 'Brief', 'Business', 'Camus',
-              'Cervantes', 'Christie', 'Classics', 'Comics', 'Cook', 'Cricket',
-              'Cycling', 'Desai', 'Design', 'Development', 'Digital Marketing',
-              'Drama', 'Drawing', 'Dumas', 'Education', 'Everything', 'Fantasy',
-              'Film', 'Finance', 'First', 'Fitness', 'Football', 'Future',
-              'Games', 'Gandhi', 'Homer', 'Horror', 'Hugo', 'Ibsen', 'Journey',
-              'Kafka', 'King', 'Lahiri', 'Larsson', 'Learn', 'Literary Fiction',
-              'Make', 'Manage', 'Marquez', 'Money', 'Mystery', 'Negotiate',
-              'Painting', 'Philosophy', 'Photography', 'Poetry', 'Production',
+              'Android', 'Art','Artificial Intelligence', 'Astronomy', 'Austen',
+              'Baseball', 'Basketball', 'Bhagat', 'Biography', 'Brief',
+              'Business', 'Camus', 'Cervantes', 'Christie', 'Classics',
+              'Comics', 'Cook', 'Cricket', 'Cycling', 'Desai', 'Design',
+              'Development', 'Digital Marketing', 'Drama', 'Drawing', 'Dumas',
+              'Education', 'Everything', 'Fantasy', 'Film', 'Finance', 'First',
+              'Fitness', 'Football', 'Future', 'Games', 'Gandhi', 'Homer',
+              'Horror', 'Hugo', 'Ibsen', 'Journey', 'Kafka', 'King', 'Lahiri',
+              'Larsson', 'Learn', 'Literary Fiction', 'Make', 'Manage',
+              'Marquez', 'Money', 'Mystery', 'Negotiate', 'Painting',
+              'Philosophy', 'Photography', 'Poetry', 'Production',
               'Programming', 'React', 'Redux', 'River', 'Robotics', 'Rowling',
               'Satire', 'Science Fiction', 'Shakespeare', 'Singh', 'Swimming',
               'Tale', 'Thrun', 'Time', 'Tolstoy', 'Travel', 'Ultimate', 'Virtual

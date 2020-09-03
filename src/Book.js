@@ -1,11 +1,12 @@
 import React from 'react';
+import noimage from './icons/noimage.jpg';
 
 class Book extends React.Component {
   render() {
     let backgroundImg;
 
     if (typeof this.props.book.imageLinks === 'undefined') {
-      backgroundImg = '';
+      backgroundImg = noimage;
     } else {
       backgroundImg = this.props.book.imageLinks.thumbnail;
     }

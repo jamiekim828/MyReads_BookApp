@@ -1,4 +1,5 @@
 import React from 'react';
+import BookRating from './BookRating';
 
 class MyBooks extends React.Component {
   render() {
@@ -40,6 +41,9 @@ class MyBooks extends React.Component {
                 </div>
                 <div className='book-title'>{book.title}</div>
                 <div className='book-authors'>{book.authors}</div>
+                <div className='book-rating'>
+                  <BookRating />
+                </div>
               </div>
             </li>
           ))}
