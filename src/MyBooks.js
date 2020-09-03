@@ -3,7 +3,6 @@ import BookRating from './BookRating';
 
 class MyBooks extends React.Component {
   render() {
-    console.log(this.props);
     return (
       <ol className='books-grid'>
         {this.props.books
